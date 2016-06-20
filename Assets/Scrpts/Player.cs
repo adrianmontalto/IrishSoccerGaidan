@@ -3,82 +3,71 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    private CharacterController controller;
-    private bool selectedPlayer = true;//a bool value to determine whether the player is selected
+    private CharacterController controller;//the character controller
+    private float gravityForce = 0.0f;//the force of gravity
     private float movementTimer = 0.0f;//a timer to calculate movement
-    public float movementResetTimer = 1.0f;//value to reset movement timer
+    private int drunkFactor = 0;//a number for how drunk the player is
+    public float movementResetTimer = 0.0f;//value to reset timer
     [Range(1.0f,10.0f)]
-    public float speed = 0.0f;//the speed of the player
+    public float speed = 0.0f;//the players speed
+    public float gravity = 20.0f;//the players gravity
     public float randomMin = 0.0f;//the min for the player random movement
-    public float randomMax = 0.0f;//the max for the players random movement
-  	// Use this for initialization
-	void Start ()
+    public float randomMax = 0.0f;//the max for the player random movement
+    
+    // Use this for initialization
+    void Start()
     {
+        //gets the character controller attached to the player
         controller = gameObject.GetComponent<CharacterController>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        //checks to see if that player is selected
-	    if(selectedPlayer == true)
-        {
-            //runs the code for player input
-            ControllerMovement();
-        }
-        else
-        {
-            //runs the code for AI movement
-            AiMovement();
-        }
-	}
-
-    public void SetSelectedPlayer(bool isSelected)
-    {
-        selectedPlayer = isSelected;
     }
 
-    void AiMovement()
-    {
-
-    }
-
-    void ControllerMovement()
+    //checks what keys the player is pressing
+    void InputCheck()
     {
         movementTimer -= Time.deltaTime;
-        //checks to see if the up or down key are pressed
-        if (Input.GetButton("Up") || Input.GetButton("Down"))
+        //checks to see whether the player is moving up or down and left or right
+        float h_input = Input.GetAxis("Horizontal") * speed;
+        float v_input = Input.GetAxis("Vertical") * speed;
+
+        //checks to see if the player isn't grounded
+        if (!controller.isGrounded)
         {
-            float h_input = Input.GetAxis("Horizontal");
-            float v_input = Input.GetAxis("Vertical");            
-            Vector3 direction = new Vector3(h_input, -10, v_input);
-            if (movementTimer < 0)
-            {
-                float random = Random.Range(randomMin, randomMax);
-                direction = new Vector3(h_input + random, -10, v_input);
-                movementTimer = movementResetTimer;
-            }
-            
-            //direction.Normalize();
-            direction *= Time.deltaTime * speed;
-            controller.Move(direction);            
+            //applies gravity to the playe
+            gravityForce += Physics.gravity.y * gravity * Time.deltaTime;
         }
 
-        //checks to see if the left or right key is down
-        if (Input.GetButton("Left") || Input.GetButton("Right"))
+        //moves the player
+        Vector3 directions = new Vector3(h_input, gravityForce, v_input);
+        
+        if(movementTimer < 0)
         {
-            float h_input = Input.GetAxis("Horizontal");
-            float v_input = Input.GetAxis("Vertical");
-            Vector3 direction = new Vector3(h_input, -10, v_input);
-            if(movementTimer < 0)
+            if (Input.GetButton("Up") || Input.GetButton("Down"))
             {
                 float random = Random.Range(randomMin, randomMax);
-                direction = new Vector3(h_input, -10, v_input + random);
+                directions = new Vector3(h_input + random, gravityForce, v_input);
                 movementTimer = movementResetTimer;
             }
-            //direction.Normalize();
-            direction *= Time.deltaTime * speed;
-            controller.Move(direction);
+            if (Input.GetButton("Left") || Input.GetButton("Right"))
+            {
+                float random = Random.Range(randomMin, randomMax);
+                directions = new Vector3(h_input, gravityForce, v_input + random);
+                movementTimer = movementResetTimer;
+            }
         }
+
+        controller.Move(directions * Time.deltaTime);
+        //checks to see if the player is grounded
+        if (controller.isGrounded)
+        {
+            //makes the jumpforce = nothing
+            gravityForce = 0.0f;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //calls the input check function
+        InputCheck();
     }
 }
