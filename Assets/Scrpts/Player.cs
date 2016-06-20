@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public float speed = 0.0f;//the speed of the player
     public float randomMin = 0.0f;//the min for the player random movement
     public float randomMax = 0.0f;//the max for the players random movement
-	// Use this for initialization
+  	// Use this for initialization
 	void Start ()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -47,15 +47,15 @@ public class Player : MonoBehaviour
     {
         movementTimer -= Time.deltaTime;
         //checks to see if the up or down key are pressed
-        if (Input.GetKey("up") || Input.GetKey("down"))
+        if (Input.GetButton("Up") || Input.GetButton("Down"))
         {
             float h_input = Input.GetAxis("Horizontal");
             float v_input = Input.GetAxis("Vertical");            
-            Vector3 direction = new Vector3(h_input, 0, v_input);
+            Vector3 direction = new Vector3(h_input, -10, v_input);
             if (movementTimer < 0)
             {
                 float random = Random.Range(randomMin, randomMax);
-                direction = new Vector3(h_input + random, 0, v_input);
+                direction = new Vector3(h_input + random, -10, v_input);
                 movementTimer = movementResetTimer;
             }
             
@@ -65,15 +65,15 @@ public class Player : MonoBehaviour
         }
 
         //checks to see if the left or right key is down
-        if (Input.GetKey("left") || Input.GetKey("right"))
+        if (Input.GetButton("Left") || Input.GetButton("Right"))
         {
             float h_input = Input.GetAxis("Horizontal");
             float v_input = Input.GetAxis("Vertical");
-            Vector3 direction = new Vector3(h_input, 0, v_input);
+            Vector3 direction = new Vector3(h_input, -10, v_input);
             if(movementTimer < 0)
             {
                 float random = Random.Range(randomMin, randomMax);
-                direction = new Vector3(h_input, 0, v_input + random);
+                direction = new Vector3(h_input, -10, v_input + random);
                 movementTimer = movementResetTimer;
             }
             //direction.Normalize();
