@@ -45,12 +45,14 @@ public class Player : MonoBehaviour
             {
                 float random = Random.Range(randomMin, randomMax);
                 directions = new Vector3(h_input + random, gravityForce, v_input);
+                directions.Normalize();
                 movementTimer = movementResetTimer;
             }
             if (Input.GetButton("Left") || Input.GetButton("Right"))
             {
                 float random = Random.Range(randomMin, randomMax);
                 directions = new Vector3(h_input, gravityForce, v_input + random);
+                directions.Normalize();
                 movementTimer = movementResetTimer;
             }
         }
