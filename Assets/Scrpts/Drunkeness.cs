@@ -21,7 +21,7 @@ public class Drunkeness : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         xFactor = Random.Range(randomMin * drunkFactor,randomMax * drunkFactor);
         yFactor = Random.Range(randomMin * drunkFactor,randomMax * drunkFactor);
-        speed = player.speed;
+        speed = player.speed * 0.33f;
 	}
 	
 	// Update is called once per frame

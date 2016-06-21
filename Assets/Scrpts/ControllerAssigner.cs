@@ -39,7 +39,7 @@ public class ControllerAssigner : MonoBehaviour
             {
                 SetPlayer(player2, ref isPlayer2Set);
             }
-        }        
+        }
     }
 
     void SetPlayer(GameObject player, ref bool setPlayer)
@@ -52,7 +52,7 @@ public class ControllerAssigner : MonoBehaviour
             if (isController1Available)
             {
                 //checks to see if the start button is pressed
-                if (Input.GetButton("J1Start"))
+                if (Input.GetButton("j1Start"))
                 {
                     isController1Available = false;
                     player.GetComponent<Player>().SetControllerNumber(1);
@@ -65,11 +65,11 @@ public class ControllerAssigner : MonoBehaviour
             if (isController2Available)
             {
                 //checks to see if the start button is pressed
-                if (Input.GetButton("J2Start"))
+                if (Input.GetButton("j2Start"))
                 {
                     isController2Available = false;
-                    player.GetComponent<Player>().SetControllerNumber(2);
                     player.GetComponent<Player>().SetActive(true);
+                    player.GetComponent<Player>().SetControllerNumber(2);
                     setPlayer = true;
                 }
             }
