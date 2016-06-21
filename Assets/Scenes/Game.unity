@@ -109,13 +109,13 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18335441}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 0.7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &18335447
 MonoBehaviour:
@@ -133,8 +133,7 @@ MonoBehaviour:
   RightGoal: {fileID: 1731958169}
   Player1: {fileID: 619877527}
   Player2: {fileID: 280493055}
-  scoreManager: {fileID: 0}
-  scoreP1: 0
+  scoreManager: {fileID: 766675141}
 --- !u!1 &30019850
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +375,7 @@ MonoBehaviour:
   playerNumber: 2
   speed: 4
   gravity: 20
+  pushPower: 100
   Potato: {fileID: 18335441}
 --- !u!143 &280493058
 CharacterController:
@@ -394,34 +394,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!136 &280493059
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 280493055}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.6, z: 0}
---- !u!54 &280493060
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 280493055}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!1001 &364894645
 Prefab:
   m_ObjectHideFlags: 0
@@ -431,7 +403,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 490678, guid: 2a8b801970c08e84f95e5793d22dfd6c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.25
+      value: 7.26
       objectReference: {fileID: 0}
     - target: {fileID: 490678, guid: 2a8b801970c08e84f95e5793d22dfd6c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -746,34 +718,6 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 125890, guid: 5f9ea90b75f18f643b94699b5362c907, type: 2}
   m_PrefabInternal: {fileID: 1159266419}
---- !u!54 &619877530
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 619877527}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
---- !u!136 &619877531
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 619877527}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.6, z: 0}
 --- !u!143 &619877532
 CharacterController:
   m_ObjectHideFlags: 0
@@ -785,7 +729,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.5
-  m_Radius: 0.1
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -805,6 +749,7 @@ MonoBehaviour:
   playerNumber: 2
   speed: 4
   gravity: 20
+  pushPower: 100
   Potato: {fileID: 18335441}
 --- !u!114 &619877534
 MonoBehaviour:
@@ -1403,11 +1348,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 462058, guid: 5f9ea90b75f18f643b94699b5362c907, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.94
+      value: -6.06
       objectReference: {fileID: 0}
     - target: {fileID: 462058, guid: 5f9ea90b75f18f643b94699b5362c907, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.154
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 462058, guid: 5f9ea90b75f18f643b94699b5362c907, type: 2}
       propertyPath: m_LocalPosition.z

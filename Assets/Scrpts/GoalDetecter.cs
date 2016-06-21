@@ -14,10 +14,6 @@ public class GoalDetecter : MonoBehaviour
     private Vector3 Player1StartPos = new Vector3(0, 0, 0);
     private Vector3 Player2StartPos = new Vector3(0, 0, 0);
 
-    public int scoreP1;
-
-   Vector3 resetpos;
-
     //public Collider PotatoCol;
     // Use this for initialization
     void Start ()

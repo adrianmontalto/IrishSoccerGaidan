@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [Range(1.0f,10.0f)]
     public float speed = 0.0f;//the players speed
     public float gravity = 20.0f;//the players gravity
+    public float pushPower = 20.0f;
 
     Rigidbody prb;
 
@@ -101,11 +102,18 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (col.gameObject.name == "Potato")
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        Vector3 force;
+
+        if(body == null || body.isKinematic)
         {
-            prb.AddForce(col.relativeVelocity * -0.0005f, ForceMode.VelocityChange);
+            return;
         }
+
+        force = hit.controller.velocity * pushPower;
+        body.AddForceAtPosition(force, hit.point);
     }
 }
