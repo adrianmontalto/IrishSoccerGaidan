@@ -5,16 +5,19 @@ public class Player : MonoBehaviour
 {
     private CharacterController controller;//the character controller
     private float gravityForce = 0.0f;//the force of gravity
+    private float hitTimer = 0.0f;
     private int controllerNumber = 0;//the number for the assigned controller
     private bool isActive = false;//to determine whether the player can move
+    private Vector3 force = new Vector3(0,0,0);
+    private AudioSource source;
     [Range(1, 2)]
     public int playerNumber = 0;//the players number
     [Range(1.0f,10.0f)]
     public float speed = 0.0f;//the players speed
     public float gravity = 20.0f;//the players gravity
     public float pushPower = 20.0f;
-
-    Rigidbody prb;
+    public float hitResetTimer = 0.5f;
+    public AudioClip kickSound;
 
     public GameObject Potato;
     // Use this for initialization
@@ -22,12 +25,13 @@ public class Player : MonoBehaviour
     {
         //gets the character controller attached to the player
         controller = gameObject.GetComponent<CharacterController>();
-        prb = Potato.GetComponent<Rigidbody>();
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        hitTimer -= Time.deltaTime;
         //checks to see if the player is active
         if(isActive == true)
         {
@@ -106,14 +110,18 @@ public class Player : MonoBehaviour
     {
         Rigidbody body = hit.collider.attachedRigidbody;
 
-        Vector3 force;
-
         if(body == null || body.isKinematic)
         {
             return;
         }
 
-        force = hit.controller.velocity * pushPower;
+        if(hitTimer < 0)
+        {
+            force = hit.controller.velocity * pushPower;
+            source.PlayOneShot(kickSound,10.0f);
+            hitTimer = hitResetTimer;
+        }
         body.AddForceAtPosition(force, hit.point);
+        source.PlayOneShot(kickSound, 1.0f);
     }
 }
