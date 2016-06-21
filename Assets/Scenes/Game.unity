@@ -896,28 +896,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250f6ad00d3c5424790458d9734f7b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 2
+  playerNumber: 1
   speed: 4
   gravity: 20
   pushPower: 230
   hitResetTimer: 1
   kickSound: {fileID: 8300000, guid: e0402f1110ee3b245a317af36b9d6d6c, type: 3}
   Potato: {fileID: 18335441}
---- !u!114 &619877534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 619877527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e0bd83973fa274280ea98737aa4027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 619877533}
-  movementResetTimer: 0.3
-  randomMin: -7
-  randomMax: 7
 --- !u!1 &623816785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,7 +1678,7 @@ GameObject:
   - 4: {fileID: 1536338715}
   - 82: {fileID: 1536338714}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: backgroundSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

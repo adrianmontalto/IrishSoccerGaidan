@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private float gravityForce = 0.0f;//the force of gravity
     private float hitTimer = 0.0f;
     private int controllerNumber = 0;//the number for the assigned controller
-    private bool isActive = false;//to determine whether the player can move
+    private bool controllerActive = false;//to determine whether the player can move
     private Vector3 force = new Vector3(0,0,0);
     private AudioSource source;
     [Range(1, 2)]
@@ -33,13 +33,17 @@ public class Player : MonoBehaviour
     {
         hitTimer -= Time.deltaTime;
         //checks to see if the player is active
-        if(isActive == true)
+        if(controllerActive == true)
         {
             string axisname = "j" + controllerNumber + "Horizontal";
             float xAsis = Input.GetAxis(axisname);
             axisname = "j" + controllerNumber + "Vertical";
             float yAxis = Input.GetAxis(axisname);
             ControllerInputCheck(xAsis, yAxis);
+        }
+        if(controllerActive == false)
+        {
+            InputCheck();
         }
     }
 
@@ -88,7 +92,7 @@ public class Player : MonoBehaviour
     public void SetActive(bool active)
     {
         //sets the active bool
-        isActive = active;
+        controllerActive = active;
     }
 
     public void SetControllerNumber(int number)
@@ -98,12 +102,58 @@ public class Player : MonoBehaviour
 
     void Player1KeyboardCheck()
     {
+        //checks to see whether the player is moving up or down and left or right
+        float h_input = Input.GetAxis("K1Horizontal") *speed;
+        float v_input = Input.GetAxis("K1Vertical") * speed;
 
+        Vector3 facingDirection = new Vector3(h_input, 0, v_input);
+        transform.LookAt(transform.position + facingDirection);
+
+        //checks to see if the player isn't grounded
+        if (!controller.isGrounded)
+        {
+            //applies gravity to the playe
+            gravityForce += Physics.gravity.y * gravity * Time.deltaTime;
+        }
+
+        //moves the player
+        Vector3 directions = new Vector3(h_input, gravityForce, v_input);
+
+        controller.Move(directions * Time.deltaTime);
+        //checks to see if the player is grounded
+        if (controller.isGrounded)
+        {
+            //makes the jumpforce = nothing
+            gravityForce = 0.0f;
+        }
     }
 
     void Player2KeyboardCheck()
     {
+        //checks to see whether the player is moving up or down and left or right
+        float h_input = Input.GetAxis("K2Horizontal") * speed;
+        float v_input = Input.GetAxis("K2Vertical") * speed;
 
+        Vector3 facingDirection = new Vector3(h_input, 0, v_input);
+        transform.LookAt(transform.position + facingDirection);
+
+        //checks to see if the player isn't grounded
+        if (!controller.isGrounded)
+        {
+            //applies gravity to the playe
+            gravityForce += Physics.gravity.y * gravity * Time.deltaTime;
+        }
+
+        //moves the player
+        Vector3 directions = new Vector3(h_input, gravityForce, v_input);
+
+        controller.Move(directions * Time.deltaTime);
+        //checks to see if the player is grounded
+        if (controller.isGrounded)
+        {
+            //makes the jumpforce = nothing
+            gravityForce = 0.0f;
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
