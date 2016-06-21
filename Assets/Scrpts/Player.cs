@@ -12,12 +12,16 @@ public class Player : MonoBehaviour
     [Range(1.0f,10.0f)]
     public float speed = 0.0f;//the players speed
     public float gravity = 20.0f;//the players gravity
-    
+
+    Rigidbody prb;
+
+    public GameObject Potato;
     // Use this for initialization
     void Start()
     {
         //gets the character controller attached to the player
         controller = gameObject.GetComponent<CharacterController>();
+        prb = Potato.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -95,5 +99,13 @@ public class Player : MonoBehaviour
     void Player2KeyboardCheck()
     {
 
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Potato")
+        {
+            prb.AddForce(col.relativeVelocity * -0.0005f, ForceMode.VelocityChange);
+        }
     }
 }
