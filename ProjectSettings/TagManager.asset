@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - player
+  - Potato
+  - LeftGoal
+  - RightGoal
   layers:
   - Default
   - TransparentFX
