@@ -8,6 +8,7 @@ public class GoalDetecter : MonoBehaviour
     public GameObject RightGoal;
     public GameObject Player1;
     public GameObject Player2;
+    public GameObject scoreManager;
 
     private Vector3 PotatoStartPos = new Vector3(0,0,0);
     private Vector3 Player1StartPos = new Vector3(0, 0, 0);
@@ -41,6 +42,7 @@ public class GoalDetecter : MonoBehaviour
             Potato.transform.position = PotatoStartPos;
             Player1.transform.position = Player1StartPos;
             Player2.transform.position = Player2StartPos;
+            scoreManager.GetComponent<ScoreManager>().Addplayer2Score(1);
         }
 
         if (col.gameObject.name == "RightGoal")
@@ -49,6 +51,7 @@ public class GoalDetecter : MonoBehaviour
             Potato.transform.position = PotatoStartPos;
             Player1.transform.position = Player1StartPos;
             Player2.transform.position = Player2StartPos;
+            scoreManager.GetComponent<ScoreManager>().AddPlayer1Score(1);
         }
     }
 }
