@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 280493057}
-  movementResetTimer: 0.3
+  movementResetTimer: 0.5
   randomMin: -7
   randomMax: 7
 --- !u!114 &280493057
@@ -794,6 +794,21 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 125890, guid: 5f9ea90b75f18f643b94699b5362c907, type: 2}
   m_PrefabInternal: {fileID: 1159266419}
+--- !u!114 &619877528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 619877527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e0bd83973fa274280ea98737aa4027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 619877533}
+  movementResetTimer: 0.5
+  randomMin: -7
+  randomMax: 7
 --- !u!82 &619877530
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1231,6 +1246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1ScoreText: {fileID: 250325604}
   player2ScoreText: {fileID: 742919846}
+  player1: {fileID: 619877528}
+  player2: {fileID: 280493056}
 --- !u!4 &766675143
 Transform:
   m_ObjectHideFlags: 0
