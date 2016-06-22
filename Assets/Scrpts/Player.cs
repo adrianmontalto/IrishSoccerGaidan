@@ -168,11 +168,12 @@ public class Player : MonoBehaviour
         if(hitTimer < 0)
         {
             force = hit.controller.velocity * pushPower;
-            source.PlayOneShot(kickSound,10.0f);
+            source.PlayOneShot(kickSound,1.0f);
             hitTimer = hitResetTimer;
+            Debug.Log("hit");
         }
+        //source.Stop();
         body.AddForceAtPosition(force, hit.point);
         //body.AddForce();
-        source.PlayOneShot(kickSound, 1.0f);
     }
 }
