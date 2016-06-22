@@ -159,12 +159,12 @@ public class Player : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
-
+    
         if(body == null || body.isKinematic)
         {
             return;
         }
-
+    
         if(hitTimer < 0)
         {
             force = hit.controller.velocity * pushPower;
@@ -172,6 +172,7 @@ public class Player : MonoBehaviour
             hitTimer = hitResetTimer;
         }
         body.AddForceAtPosition(force, hit.point);
+        //body.AddForce();
         source.PlayOneShot(kickSound, 1.0f);
     }
 }
